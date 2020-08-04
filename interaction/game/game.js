@@ -37,7 +37,7 @@ p.nominalBounds = new cjs.Rectangle(16,16,50,50);
 	this.instance.setTransform(41,41,1,1,0,0,0,41,41);
 
 	this.shape_1 = new cjs.Shape();
-	this.shape_1.graphics.f("#FFFFFF").s().p("AmZGaIAAszIMzAAIAAMzg");
+	this.shape_1.graphics.f("#00FF00").s().p("AmZGaIAAszIMzAAIAAMzg");
 	this.shape_1.setTransform(41,41);
 
 	this.shape_2 = new cjs.Shape();
@@ -96,6 +96,13 @@ p.nominalBounds = new cjs.Rectangle(-85.6,-54,253.7,190.2);
 	// actions tween:
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
 
+	// レイヤー_2
+	this.shape = new cjs.Shape();
+	this.shape.graphics.f().s("#000000").ss(1,1,1).p("AFHu2IOuNpI49QEIustpg");
+	this.shape.setTransform(262.2,174.15);
+
+	this.timeline.addTween(cjs.Tween.get(this.shape).wait(1));
+
 	// レイヤー_1
 	this.a = new lib.シンボル2();
 	this.a.name = "a";
@@ -104,17 +111,10 @@ p.nominalBounds = new cjs.Rectangle(-85.6,-54,253.7,190.2);
 
 	this.timeline.addTween(cjs.Tween.get(this.a).wait(1));
 
-	// レイヤー_4
-	this.shape = new cjs.Shape();
-	this.shape.graphics.f("#00FF00").s().p("Egq4AfLMAAAg+VMBVxAAAMAAAA+Vg");
-	this.shape.setTransform(277.5,200.525);
-
-	this.timeline.addTween(cjs.Tween.get(this.shape).wait(1));
-
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(278,201.1,274,198.9);
+p.nominalBounds = new cjs.Rectangle(409.4,278.1,-19.299999999999955,-7.800000000000011);
 // library properties:
 lib.properties = {
 	id: '2FA8E0C7230941478CE2CA3DB82DBEDF',
