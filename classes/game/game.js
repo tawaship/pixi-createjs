@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"game_atlas_", frames: [[0,0,32,32]]}
+		{name:"game_atlas_", frames: [[0,592,158,158],[160,592,336,56],[0,0,1011,590],[498,592,32,32]]}
 ];
 
 
@@ -11,11 +11,84 @@ lib.ssMetadata = [
 
 
 
-(lib.bmp = function() {
+(lib.CachedBmp_22 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
+
+
+(lib.CachedBmp_21 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(1);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_20 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(2);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.bmp = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(3);
+}).prototype = p = new cjs.Sprite();
+// helper functions:
+
+function mc_symbol_clone() {
+	var clone = this._cloneProps(new this.constructor(this.mode, this.startPosition, this.loop));
+	clone.gotoAndStop(this.currentFrame);
+	clone.paused = this.paused;
+	clone.framerate = this.framerate;
+	return clone;
+}
+
+function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
+	var prototype = cjs.extend(symbol, cjs.MovieClip);
+	prototype.clone = mc_symbol_clone;
+	prototype.nominalBounds = nominalBounds;
+	prototype.frameBounds = frameBounds;
+	return prototype;
+	}
+
+
+(lib.シンボル2 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// レイヤー_1
+	this.instance = new lib.CachedBmp_22();
+	this.instance.setTransform(0,0,0.5,0.5);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.シンボル2, new cjs.Rectangle(0,0,79,79), null);
+
+
+(lib.シンボル1 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// レイヤー_2
+	this.instance = new lib.シンボル2();
+	this.instance.setTransform(39.65,-46.3,0.5954,0.5954,0,0,0,39.6,39.6);
+	this.instance.filters = [new cjs.ColorFilter(0, 0, 0, 1, 255, 119, 255, 0)];
+	this.instance.cache(-2,-2,83,83);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+	// レイヤー_1
+	this.instance_1 = new lib.シンボル2();
+	this.instance_1.setTransform(39.6,39.6,1,1,0,0,0,39.6,39.6);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.シンボル1, new cjs.Rectangle(0,-69.9,79,148.9), null);
 
 
 // stage content:
@@ -23,75 +96,27 @@ lib.ssMetadata = [
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.shape = new cjs.Shape();
-	this.shape.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAGgDAAgHQAAgGgDgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQAEgHAIgeIAliAIABAAIAsCTQAEAOAEAFQADADAGABIAAAFgAgaAWIAqAAIgVhLg");
-	this.shape.setTransform(478,35.075);
+	this.instance = new lib.CachedBmp_21();
+	this.instance.setTransform(338,21.2,0.5,0.5);
 
-	this.shape_1 = new cjs.Shape();
-	this.shape_1.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAFgDABgHQgBgGgDgLIgHgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIABAAIAsCTQAFAOADAFQADADAGABIAAAFgAgaAWIAqAAIgUhLg");
-	this.shape_1.setTransform(466,35.075);
+	this.instance_1 = new lib.bmp();
+	this.instance_1.setTransform(15.75,14.8);
 
-	this.shape_2 = new cjs.Shape();
-	this.shape_2.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBADgBQAEgDAAgHQAAgGgCgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQACABAFABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIACAAIArCTQAFAOAEAFQACADAGABIAAAFgAgaAWIArAAIgWhLg");
-	this.shape_2.setTransform(454,35.075);
+	this.instance_2 = new lib.CachedBmp_20();
+	this.instance_2.setTransform(24,86.55,0.5,0.5);
 
-	this.shape_3 = new cjs.Shape();
-	this.shape_3.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAGgDAAgHQAAgGgDgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQAEgHAIgeIAliAIABAAIAsCTQAEAOAEAFQADADAGABIAAAFgAgaAWIAqAAIgVhLg");
-	this.shape_3.setTransform(442,35.075);
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_2},{t:this.instance_1},{t:this.instance}]}).wait(1));
 
-	this.shape_4 = new cjs.Shape();
-	this.shape_4.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAFgDABgHQgBgGgDgLIgHgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIABAAIAsCTQAFAOADAFQADADAGABIAAAFgAgaAWIAqAAIgUhLg");
-	this.shape_4.setTransform(430,35.075);
+	// レイヤー_3
+	this.instance_3 = new lib.シンボル1();
+	this.instance_3.setTransform(67.95,331.95,1,1,0,0,0,39.6,39.6);
 
-	this.shape_5 = new cjs.Shape();
-	this.shape_5.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBADgBQAEgDAAgHQAAgGgCgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQACABAFABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIACAAIArCTQAFAOAEAFQACADAGABIAAAFgAgaAWIArAAIgWhLg");
-	this.shape_5.setTransform(418,35.075);
-
-	this.shape_6 = new cjs.Shape();
-	this.shape_6.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAGgDAAgHQAAgGgDgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQAEgHAIgeIAliAIABAAIAsCTQAEAOAEAFQADADAGABIAAAFgAgaAWIAqAAIgVhLg");
-	this.shape_6.setTransform(406,35.075);
-
-	this.shape_7 = new cjs.Shape();
-	this.shape_7.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAFgDABgHQgBgGgDgLIgHgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIABAAIAsCTQAFAOADAFQADADAGABIAAAFgAgaAWIAqAAIgUhLg");
-	this.shape_7.setTransform(394,35.075);
-
-	this.shape_8 = new cjs.Shape();
-	this.shape_8.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBADgBQAEgDAAgHQAAgGgCgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQACABAFABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIACAAIArCTQAFAOAEAFQACADAGABIAAAFgAgaAWIArAAIgWhLg");
-	this.shape_8.setTransform(382,35.075);
-
-	this.shape_9 = new cjs.Shape();
-	this.shape_9.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAGgDAAgHQAAgGgDgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQAEgHAIgeIAliAIABAAIAsCTQAEAOAEAFQADADAGABIAAAFgAgaAWIAqAAIgVhLg");
-	this.shape_9.setTransform(370,35.075);
-
-	this.shape_10 = new cjs.Shape();
-	this.shape_10.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBACgBQAFgDABgHQgBgGgDgLIgHgXIgvAAIgIAeIgBAKQAAAIAEACQABABAGABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIABAAIAsCTQAFAOADAFQADADAGABIAAAFgAgaAWIAqAAIgUhLg");
-	this.shape_10.setTransform(358,35.075);
-
-	this.shape_11 = new cjs.Shape();
-	this.shape_11.graphics.f("#6E6E6E").s().p("AAPBYIAAgFQAHgBADgBQAEgDAAgHQAAgGgCgLIgIgXIgvAAIgIAeIgBAKQAAAIAEACQACABAFABIAAAFIghAAIAAgFIAEgBIAEgEQADgHAKgeIAkiAIACAAIArCTQAFAOAEAFQACADAGABIAAAFgAgaAWIArAAIgWhLg");
-	this.shape_11.setTransform(346,35.075);
-
-	this.instance = new lib.bmp();
-	this.instance.setTransform(15.75,14.8);
-
-	this.shape_12 = new cjs.Shape();
-	this.shape_12.graphics.f().s("#CC6600").ss(15,1,1).p("AkmgOICMAAIJ/sMQEvg9CPDsQBzC7AJDZQAGCghCCCIiqBkIAAAyIi0JOIksC+I0nngIBaC+IAAHgQDFBaDKBKQCnA+CGhWISlAAIHCjmIAAloApNu3QAACzh/B+Qh/B/izAAQiyAAiAh/Qh+h+AAizQAAizB+h/QCAh/CyAAQCzAAB/B/QB/B/AACzg");
-	this.shape_12.setTransform(376.5,235.5321);
-
-	this.shape_13 = new cjs.Shape();
-	this.shape_13.graphics.f("#6E6E6E").s().p("AgpArQgSgSAAgZQAAgYASgSQARgRAYAAQAZAAARARQASASAAAYQAAAZgSASQgRARgZAAQgYAAgRgRg");
-	this.shape_13.setTransform(72,133.05);
-
-	this.shape_14 = new cjs.Shape();
-	this.shape_14.graphics.f("#00FF00").s().p("ADcSPIAAnpIpDAAIAAloIJDAAIAAlnIIIAAIAAFnILaAAIAAFoIraAAIAAHpgALWlDQh+h/AAizQAAizB+h/QCAh+CyAAQCzAAB/B+QB/B/AACzQAACzh/B/Qh/B/izAAQiyAAiAh/gA29jEIAAvKIPKAAIAAPKgAzNm0IHqAAIAAnqInqAAg");
-	this.shape_14.setTransform(171,203.275);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_14},{t:this.shape_13},{t:this.shape_12},{t:this.instance},{t:this.shape_11},{t:this.shape_10},{t:this.shape_9},{t:this.shape_8},{t:this.shape_7},{t:this.shape_6},{t:this.shape_5},{t:this.shape_4},{t:this.shape_3},{t:this.shape_2},{t:this.shape_1},{t:this.shape}]}).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance_3).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(290.8,214.8,238.7,166.7);
+p.nominalBounds = new cjs.Rectangle(290.8,214.8,238.7,166.8);
 // library properties:
 lib.properties = {
 	id: '2FA8E0C7230941478CE2CA3DB82DBEDF',
@@ -101,7 +126,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/game_atlas_.png?1596507811689", id:"game_atlas_"}
+		{src:"images/game_atlas_.png?1596607355357", id:"game_atlas_"}
 	],
 	preloads: []
 };

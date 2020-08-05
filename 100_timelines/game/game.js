@@ -11,7 +11,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_8 = function() {
+(lib.CachedBmp_30 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
@@ -22,8 +22,8 @@ lib.ssMetadata = [
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.CachedBmp_8();
-	this.instance.setTransform(-15.75,-15.75,0.5,0.5);
+	this.instance = new lib.CachedBmp_30();
+	this.instance.setTransform(-15.7,-15.75,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
@@ -46,7 +46,7 @@ p.nominalBounds = new cjs.Rectangle(0,0,0,0);
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.gra("synched",0);
+	this.instance = new lib.gra();
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).to({y:400},65).wait(1));
 
@@ -114,7 +114,7 @@ p.nominalBounds = new cjs.Rectangle(-15.7,-15.7,31.5,431.5);
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(211.3,184.3,328.7,207.59999999999997);
+p.nominalBounds = new cjs.Rectangle(211.4,184.3,328.6,207.59999999999997);
 // library properties:
 lib.properties = {
 	id: '2FA8E0C7230941478CE2CA3DB82DBEDF',
@@ -124,7 +124,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/game_atlas_.png?1596588395845", id:"game_atlas_"}
+		{src:"images/game_atlas_.png?1596608256206", id:"game_atlas_"}
 	],
 	preloads: []
 };
