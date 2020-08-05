@@ -140,7 +140,7 @@
 							
 							stage: {
 								value: stage
-							},
+							}
 						});
 						
 						AdobeAn.compositionLoaded(lib.properties.id);
