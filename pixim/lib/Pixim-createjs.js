@@ -67,11 +67,32 @@
 		
 		Pixim.Application.call(this, pixiOptions, piximOpstions);
 		
+		var app = this.app;
+		
 		this._composition = comp;
 		this._rootClass = root;
 		this._basepath = basepath;
 		
 		createjs.Ticker.framerate = prop.fps;
+		
+		function handlePlay() {
+			stage.tick();
+			app.render();
+		}
+		
+		Object.defineProperties(this, {
+			play: {
+				value: function() {
+					createjs.Ticker.addEventListener('tick', handlePlay);
+				}
+			},
+			
+			stop: {
+				value: function() {
+					createjs.Ticker.removeEventListener('tick', handlePlay);
+				}
+			}
+		});
 	}
 	
 	CreatejsApplication.prototype = Object.create(Pixim.Application.prototype);
@@ -124,36 +145,18 @@
 						
 						AdobeAn.compositionLoaded(lib.properties.id);
 						
-						stage.addChild(exportRoot);
-						
 						var content = new Content();
 						content.addVars({
 							createjsRoot: exportRoot
 						});
 						
+						stage.addChild(exportRoot);
+						
 						return app.attachAsync(content);
 					});
 			}
-		},
-		
-		play: {
-			value: function() {
-				Pixim.Application.prototype.play.call(this);
-				createjs.Ticker.addEventListener('tick', handlePlay);
-			}
-		},
-		
-		stop: {
-			value: function() {
-				Pixim.Application.prototype.stop.call(this);
-				createjs.Ticker.removeEventListener('tick', handlePlay);
-			}
 		}
 	});
-	
-	function handlePlay() {
-		stage.tick();
-	}
 	
 	var Content = Pixim.Content.create();
 	

@@ -11,7 +11,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_25 = function() {
+(lib.CachedBmp_2 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
@@ -38,7 +38,7 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.CachedBmp_25();
+	this.instance = new lib.CachedBmp_2();
 	this.instance.setTransform(-15.75,-15.75,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
@@ -93,14 +93,25 @@ p.nominalBounds = new cjs.Rectangle(0,0,0,0);
 		
 		var delta = this.delta;
 		var children = this.c.children;
+		var cur = 0;
+		var c = 0;
+		var t = 0;
 		createjs.Ticker.addEventListener("tick", function(e) {
-			for (var i = 0; i < children.length; i++) {
-				children[i].a.y += 6.15;
-				if (children[i].a.y >= 400) {
-					children[i].a.y = 0;
-				}
+			cur += 6.15;
+			if (cur >= 400) {
+				cur = 0;
 			}
-			delta.text = (1000 / e.delta).toString().slice(0, 8);
+			
+			for (var i = 0; i < children.length; i++) {
+				children[i].a.y = cur;
+			}
+			
+			t += e.delta;
+			if (++c === 10) {
+				c = 0;
+				delta.text = (1000 / (t / 10)).toString().slice(0, 8);
+				t = 0;
+			}
 		});
 	}
 
@@ -140,7 +151,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/game_atlas_.png?1596519076491", id:"game_atlas_"}
+		{src:"images/game_atlas_.png?1596588290962", id:"game_atlas_"}
 	],
 	preloads: []
 };

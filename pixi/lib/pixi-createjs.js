@@ -63,15 +63,35 @@
 		pixiOptions = pixiOptions || {};
 		pixiOptions.width = prop.width;
 		pixiOptions.height = prop.height;
+		pixiOptions.autoStart = false;
 		pixiOptions.backgroundColor = parseInt(prop.color.slice(1), 16);
 		
-		this._app = new PIXI.Application(pixiOptions);
+		var app = this._app = new PIXI.Application(pixiOptions);
 		
 		this._composition = comp;
 		this._rootClass = root;
 		this._basepath = basepath;
 		
 		createjs.Ticker.framerate = prop.fps;
+		
+		function handlePlay() {
+			stage.tick();
+			app.render();
+		}
+		
+		Object.defineProperties(this, {
+			play: {
+				value: function() {
+					createjs.Ticker.addEventListener('tick', handlePlay);
+				}
+			},
+			
+			stop: {
+				value: function() {
+					createjs.Ticker.removeEventListener('tick', handlePlay);
+				}
+			}
+		});
 	}
 	
 	Object.defineProperties(CreatejsApplication.prototype, {
@@ -126,30 +146,11 @@
 						AdobeAn.compositionLoaded(lib.properties.id);
 						
 						stage.addChild(exportRoot);
-						
 						app._app.stage.addChild(exportRoot._pixiData.instance);
 					});
 			}
-		},
-		
-		play: {
-			value: function() {
-				this._app.start();
-				createjs.Ticker.addEventListener('tick', handlePlay);
-			}
-		},
-		
-		stop: {
-			value: function() {
-				this._app.stop();
-				createjs.Ticker.removeEventListener('tick', handlePlay);
-			}
 		}
 	});
-	
-	function handlePlay() {
-		stage.tick();
-	}
 	
 	var DEG_TO_RAD = Math.PI / 180;
 	

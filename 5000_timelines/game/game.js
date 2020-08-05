@@ -11,7 +11,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_21 = function() {
+(lib.CachedBmp_10 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
@@ -22,7 +22,7 @@ lib.ssMetadata = [
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.CachedBmp_21();
+	this.instance = new lib.CachedBmp_10();
 	this.instance.setTransform(-15.75,-15.75,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
@@ -75,10 +75,17 @@ p.nominalBounds = new cjs.Rectangle(-15.7,-15.7,31.5,431.5);
 			a.x = Math.random() * lib.properties.width;
 		}
 		
-		var self = this;
+		var delta = this.delta;
+		var c = 0;
+		var t = 0;
 		createjs.Ticker.addEventListener("tick", function(e) {
-			self.delta.text = (1000 / e.delta).toString().slice(0, 8);
-		})
+			t += e.delta;
+			if (++c === 10) {
+				c = 0;
+				delta.text = (1000 / (t / 10)).toString().slice(0, 8);
+				t = 0;
+			}
+		});
 	}
 
 	// actions tween:
@@ -117,7 +124,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/game_atlas_.png?1596518745634", id:"game_atlas_"}
+		{src:"images/game_atlas_.png?1596588431797", id:"game_atlas_"}
 	],
 	preloads: []
 };
