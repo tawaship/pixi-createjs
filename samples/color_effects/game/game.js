@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"game_atlas_", frames: [[390,0,112,112],[269,58,112,112],[0,0,388,56],[0,58,267,56]]}
+		{name:"game_atlas_", frames: [[922,232,112,112],[0,0,920,920],[0,922,528,56],[893,922,320,56],[530,922,361,56],[922,0,320,56],[922,58,320,56],[922,116,320,56],[922,174,320,56]]}
 ];
 
 
@@ -11,30 +11,65 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_112 = function() {
+(lib.CachedBmp_132 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(0);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_113 = function() {
+(lib.CachedBmp_150 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_110 = function() {
+(lib.CachedBmp_142 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
 
 
 
-(lib.CachedBmp_109 = function() {
+(lib.CachedBmp_140 = function() {
 	this.initialize(ss["game_atlas_"]);
 	this.gotoAndStop(3);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_139 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(4);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_138 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(5);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_133 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(6);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_129 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(7);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_128 = function() {
+	this.initialize(ss["game_atlas_"]);
+	this.gotoAndStop(8);
 }).prototype = p = new cjs.Sprite();
 // helper functions:
 
@@ -55,28 +90,57 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 	}
 
 
+(lib.シーン_1_レイヤー_7 = function(mode,startPosition,loop) {
+	this.initialize(mode,startPosition,loop,{});
+
+	// レイヤー_7
+	this.instance = new lib.CachedBmp_150();
+	this.instance.setTransform(47.6,-28.45,0.5,0.5);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.シーン_1_レイヤー_7, null, null);
+
+
 (lib.シーン_1_レイヤー_1 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.CachedBmp_110();
-	this.instance.setTransform(363,227.45,0.5,0.5);
+	this.instance = new lib.CachedBmp_142();
+	this.instance.setTransform(194.7,285.4,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_109();
-	this.instance_1.setTransform(240.95,228.45,0.5,0.5);
+	this.instance_1 = new lib.CachedBmp_140();
+	this.instance_1.setTransform(97.95,152,0.5,0.5);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(40));
+	this.instance_2 = new lib.CachedBmp_139();
+	this.instance_2.setTransform(302.4,152,0.5,0.5);
+
+	this.instance_3 = new lib.CachedBmp_138();
+	this.instance_3.setTransform(222.95,114,0.5,0.5);
+
+	this.instance_4 = new lib.CachedBmp_133();
+	this.instance_4.setTransform(348,3,0.5,0.5);
+
+	this.instance_5 = new lib.CachedBmp_129();
+	this.instance_5.setTransform(152,3,0.5,0.5);
+
+	this.instance_6 = new lib.CachedBmp_128();
+	this.instance_6.setTransform(18,3,0.5,0.5);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_6},{t:this.instance_5},{t:this.instance_4},{t:this.instance_3},{t:this.instance_2},{t:this.instance_1},{t:this.instance}]}).wait(1));
 
 	this._renderFirstFrame();
 
-}).prototype = p = new cjs.MovieClip();
+}).prototype = getMCSymbolPrototype(lib.シーン_1_レイヤー_1, null, null);
 
 
 (lib.シンボル6 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
 	// レイヤー_1
-	this.instance = new lib.CachedBmp_113();
+	this.instance = new lib.CachedBmp_132();
 	this.instance.setTransform(0,0,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
@@ -85,21 +149,6 @@ function getMCSymbolPrototype(symbol, nominalBounds, frameBounds) {
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(0,0,56,56);
-
-
-(lib.シンボル3 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// レイヤー_1
-	this.instance = new lib.CachedBmp_112();
-	this.instance.setTransform(11.6,11.65,0.5,0.5);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-	this._renderFirstFrame();
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(11.6,11.7,55.99999999999999,56);
 
 
 (lib.___Camera___ = function(mode,startPosition,loop) {
@@ -125,44 +174,63 @@ p.nominalBounds = new cjs.Rectangle(11.6,11.7,55.99999999999999,56);
 p.nominalBounds = new cjs.Rectangle(-276,-201,552,402);
 
 
-(lib.シンボル10 = function(mode,startPosition,loop) {
+(lib.シーン_1_レイヤー_2 = function(mode,startPosition,loop) {
 	this.initialize(mode,startPosition,loop,{});
 
-	// レイヤー_1
-	this.instance = new lib.シンボル6();
-	this.instance.setTransform(117,41.9,1,1,0,0,0,28,27.9);
-	this.instance.filters = [new cjs.ColorFilter(1, 1, 0.76953125, 1, 76, -28, 144, 0)];
+	// レイヤー_2
+	this.instance = new lib.シンボル6("synched",0);
+	this.instance.setTransform(430.45,219.7,1,1,0,0,0,28,27.9);
+	this.instance.filters = [new cjs.ColorFilter(1, -1, -1, 1, 0, 0, 0, 0)];
 	this.instance.cache(-2,-2,60,60);
 
 	this.instance_1 = new lib.シンボル6("synched",0);
-	this.instance_1.setTransform(9,70.9,1,1,0,0,0,28,27.9);
+	this.instance_1.setTransform(345.2,219.7,1,1,0,0,0,28,27.9);
+	this.instance_1.filters = [new cjs.ColorFilter(1, 1, -1, 1, 0, 0, 0, 0)];
+	this.instance_1.cache(-2,-2,60,60);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
+	this.instance_2 = new lib.シンボル6("synched",0);
+	this.instance_2.setTransform(184,219.7,1,1,0,0,0,28,27.9);
+	this.instance_2.filters = [new cjs.ColorFilter(1, 1, 1, 1, 0, -255, 0, 0)];
+	this.instance_2.cache(-2,-2,60,60);
+
+	this.instance_3 = new lib.シンボル6("synched",0);
+	this.instance_3.setTransform(98.75,219.7,1,1,0,0,0,28,27.9);
+	this.instance_3.filters = [new cjs.ColorFilter(1, 1, 1, 1, 0, 255, 0, 0)];
+	this.instance_3.cache(-2,-2,60,60);
+
+	this.instance_4 = new lib.シンボル6("synched",0);
+	this.instance_4.setTransform(411,69.4,1,1,0,0,0,28,27.9);
+	this.instance_4.filters = [new cjs.ColorFilter(0.2, 0.2, 0.2, 1, 103.2, 200, 76.8, 0)];
+	this.instance_4.cache(-2,-2,60,60);
+
+	this.instance_5 = new lib.シンボル6("synched",0);
+	this.instance_5.setTransform(476.05,69.4,1,1,0,0,0,28,27.9);
+	this.instance_5.filters = [new cjs.ColorFilter(0.15, 0.15, 0.15, 1, 97.75, 92.65, 216.75, 0)];
+	this.instance_5.cache(-2,-2,60,60);
+
+	this.instance_6 = new lib.シンボル6("synched",0);
+	this.instance_6.setTransform(343,69.4,1,1,0,0,0,28,27.9);
+	this.instance_6.filters = [new cjs.ColorFilter(0.04, 0.04, 0.04, 1, 222.72, 92.16, 182.4, 0)];
+	this.instance_6.cache(-2,-2,60,60);
+
+	this.instance_7 = new lib.シンボル6("synched",0);
+	this.instance_7.setTransform(242,69.4,1,1,0,0,0,28,27.9);
+	this.instance_7.filters = [new cjs.ColorFilter(0.46, 0.46, 0.46, 1, 0, 0, 0, 0)];
+	this.instance_7.cache(-2,-2,60,60);
+
+	this.instance_8 = new lib.シンボル6("synched",0);
+	this.instance_8.setTransform(180,69.4,1,1,0,0,0,28,27.9);
+	this.instance_8.filters = [new cjs.ColorFilter(0.44, 0.44, 0.44, 1, 142.8, 142.8, 142.8, 0)];
+	this.instance_8.cache(-2,-2,60,60);
+
+	this.instance_9 = new lib.シンボル6("synched",0);
+	this.instance_9.setTransform(58.75,69.4,1,1,0,0,0,28,27.9);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_9},{t:this.instance_8},{t:this.instance_7},{t:this.instance_6},{t:this.instance_5},{t:this.instance_4},{t:this.instance_3},{t:this.instance_2},{t:this.instance_1},{t:this.instance}]}).wait(1));
 
 	this._renderFirstFrame();
 
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-19,14,164,85);
-
-
-(lib.シンボル9 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// レイヤー_1
-	this.instance = new lib.シンボル6();
-	this.instance.setTransform(46,-15.1,1,1,0,0,0,28,27.9);
-	this.instance.filters = [new cjs.ColorFilter(1, 1, 0.76953125, 1, 76, -28, 144, 0)];
-	this.instance.cache(-2,-2,60,60);
-
-	this.instance_1 = new lib.シンボル6("synched",0);
-	this.instance_1.setTransform(-76,45.85,1,1,0,0,0,28,27.9);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
-
-	this._renderFirstFrame();
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-104,-43,178,117);
+}).prototype = getMCSymbolPrototype(lib.シーン_1_レイヤー_2, null, null);
 
 
 (lib.シンボル8 = function(mode,startPosition,loop) {
@@ -170,19 +238,19 @@ p.nominalBounds = new cjs.Rectangle(-104,-43,178,117);
 
 	// レイヤー_1
 	this.instance = new lib.シンボル6();
-	this.instance.setTransform(52,-33.05,1,1,0,0,0,28,27.9);
+	this.instance.setTransform(28,27.9,1,1,0,0,0,28,27.9);
 	this.instance.filters = [new cjs.ColorFilter(1, 1, 0.76953125, 1, 76, -28, 144, 0)];
 	this.instance.cache(-2,-2,60,60);
 
 	this.instance_1 = new lib.シンボル6("synched",0);
-	this.instance_1.setTransform(28,27.9,1,1,0,0,0,28,27.9);
+	this.instance_1.setTransform(-35,27.9,1,1,0,0,0,28,27.9);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,-60.9,80,116.9);
+p.nominalBounds = new cjs.Rectangle(-63,0,119,56);
 
 
 (lib.シンボル7 = function(mode,startPosition,loop) {
@@ -190,19 +258,19 @@ p.nominalBounds = new cjs.Rectangle(0,-60.9,80,116.9);
 
 	// レイヤー_1
 	this.instance = new lib.シンボル8();
-	this.instance.setTransform(71,88.85,1,1,0,0,0,28,27.9);
+	this.instance.setTransform(126.95,88.85,1,1,0,0,0,28,27.9);
 	this.instance.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 72.45, 114.75, 4.5, 0)];
-	this.instance.cache(-2,-63,84,121);
+	this.instance.cache(-65,-2,123,60);
 
 	this.instance_1 = new lib.シンボル6("synched",0);
-	this.instance_1.setTransform(28,27.9,1,1,0,0,0,28,27.9);
+	this.instance_1.setTransform(0.95,88.85,1,1,0,0,0,28,27.9);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,123,117);
+p.nominalBounds = new cjs.Rectangle(-27,61,182,56);
 
 
 (lib.シンボル5 = function(mode,startPosition,loop) {
@@ -210,77 +278,22 @@ p.nominalBounds = new cjs.Rectangle(0,0,123,117);
 
 	// レイヤー_2
 	this.instance = new lib.シンボル7();
-	this.instance.setTransform(50,-32.05,1,1,0,0,0,28,27.9);
+	this.instance.setTransform(-95,-33.05,1,1,0,0,0,28,27.9);
 	this.instance.filters = [new cjs.ColorFilter(0.59, 0.59, 0.59, 1, 104.55, 104.55, 104.55, 0)];
-	this.instance.cache(-2,-2,127,121);
+	this.instance.cache(-29,59,186,60);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
 	// レイヤー_1
 	this.instance_1 = new lib.シンボル6("synched",0);
-	this.instance_1.setTransform(28,27.9,1,1,0,0,0,28,27.9);
+	this.instance_1.setTransform(-188,27.9,1,1,0,0,0,28,27.9);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,-59.9,145,116.9);
-
-
-(lib.シンボル4 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// レイヤー_1
-	this.instance = new lib.シンボル3("synched",0);
-	this.instance.setTransform(39.6,39.6,1,1,0,0,0,39.6,39.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-	this._renderFirstFrame();
-
-}).prototype = getMCSymbolPrototype(lib.シンボル4, new cjs.Rectangle(11.6,11.7,55.99999999999999,56), null);
-
-
-(lib.シンボル2 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// レイヤー_2
-	this.instance = new lib.シンボル4();
-	this.instance.setTransform(4.05,-50.05,1,1,0,0,0,39.6,39.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-	// レイヤー_3
-	this.instance_1 = new lib.シンボル3("synched",0);
-	this.instance_1.setTransform(14.45,-48.7);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_1).wait(1));
-
-	// レイヤー_1
-	this.instance_2 = new lib.CachedBmp_113();
-	this.instance_2.setTransform(-72,-37.1,0.5,0.5);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance_2).wait(1));
-
-	this._renderFirstFrame();
-
-}).prototype = getMCSymbolPrototype(lib.シンボル2, new cjs.Rectangle(-72,-78,154.1,97), null);
-
-
-(lib.シンボル1 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// レイヤー_2
-	this.instance = new lib.シンボル2();
-	this.instance.setTransform(36.6,42.65,1,1,0,0,0,39.6,39.6);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).to({_off:true},101).wait(36));
-
-	this._renderFirstFrame();
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-75,-74.9,154.1,96.9);
+p.nominalBounds = new cjs.Rectangle(-216,0,248,56);
 
 
 (lib.シーン_1_レイヤー_8 = function(mode,startPosition,loop) {
@@ -288,38 +301,14 @@ p.nominalBounds = new cjs.Rectangle(-75,-74.9,154.1,96.9);
 
 	// レイヤー_8
 	this.instance = new lib.シンボル5();
-	this.instance.setTransform(412.05,352.55,1,1,0,0,0,28,27.9);
+	this.instance.setTransform(384.05,354.55,1,1,0,0,0,28,27.9);
 	this.instance.alpha = 0.6211;
 
-	this.instance_1 = new lib.シンボル1();
-	this.instance_1.setTransform(313.55,399.25,1,1,0,0,0,39.6,39.6);
-	this.instance_1.filters = [new cjs.ColorFilter(0.42, 0.42, 0.42, 1, 147.9, 147.9, 73.66, 0)];
-	this.instance_1.cache(-77,-77,158,101);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(40));
+	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
 
 	this._renderFirstFrame();
 
-}).prototype = p = new cjs.MovieClip();
-
-
-(lib.シーン_1_レイヤー_3 = function(mode,startPosition,loop) {
-	this.initialize(mode,startPosition,loop,{});
-
-	// レイヤー_3
-	this.instance = new lib.シンボル10();
-	this.instance.setTransform(208.75,160.35,1,1,0,0,0,89,58.5);
-
-	this.instance_1 = new lib.シンボル9("synched",0);
-	this.instance_1.setTransform(494,195.95,1,1,0,0,0,40,58.5);
-	this.instance_1.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 72.45, 114.75, 4.5, 0)];
-	this.instance_1.cache(-106,-45,182,121);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).to({state:[{t:this.instance_1},{t:this.instance}]},29).wait(11));
-
-	this._renderFirstFrame();
-
-}).prototype = p = new cjs.MovieClip();
+}).prototype = getMCSymbolPrototype(lib.シーン_1_レイヤー_8, null, null);
 
 
 // stage content:
@@ -355,18 +344,6 @@ p.nominalBounds = new cjs.Rectangle(-75,-74.9,154.1,96.9);
 		}
 	});
 
-	// timeline functions:
-	this.frame_0 = function() {
-		console.log(6)
-		this.stop()
-	}
-	this.frame_39 = function() {
-		this.___loopingOver___ = true;
-	}
-
-	// actions tween:
-	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(39).call(this.frame_39).wait(1));
-
 	// Camera
 	this.___camera___instance = new lib.___Camera___();
 	this.___camera___instance.name = "___camera___instance";
@@ -374,38 +351,38 @@ p.nominalBounds = new cjs.Rectangle(-75,-74.9,154.1,96.9);
 	this.___camera___instance.depth = 0;
 	this.___camera___instance.visible = false;
 
-	this.timeline.addTween(cjs.Tween.get(this.___camera___instance).wait(40));
-
-	// レイヤー_3_obj_
-	this.レイヤー_3 = new lib.シーン_1_レイヤー_3();
-	this.レイヤー_3.name = "レイヤー_3";
-	this.レイヤー_3.setTransform(314.4,152.9,1,1,0,0,0,314.4,152.9);
-	this.レイヤー_3.depth = 0;
-	this.レイヤー_3.isAttachedToCamera = 0
-	this.レイヤー_3.isAttachedToMask = 0
-	this.レイヤー_3.layerDepth = 0
-	this.レイヤー_3.layerIndex = 0
-	this.レイヤー_3.maskLayerName = 0
-
-	this.timeline.addTween(cjs.Tween.get(this.レイヤー_3).wait(40));
+	this.timeline.addTween(cjs.Tween.get(this.___camera___instance).wait(1));
 
 	// レイヤー_8_obj_
 	this.レイヤー_8 = new lib.シーン_1_レイヤー_8();
 	this.レイヤー_8.name = "レイヤー_8";
-	this.レイヤー_8.setTransform(364,333.4,1,1,0,0,0,364,333.4);
+	this.レイヤー_8.setTransform(264,338.2,1,1,0,0,0,264,338.2);
 	this.レイヤー_8.depth = 0;
 	this.レイヤー_8.isAttachedToCamera = 0
 	this.レイヤー_8.isAttachedToMask = 0
 	this.レイヤー_8.layerDepth = 0
-	this.レイヤー_8.layerIndex = 1
+	this.レイヤー_8.layerIndex = 0
 	this.レイヤー_8.maskLayerName = 0
 
-	this.timeline.addTween(cjs.Tween.get(this.レイヤー_8).wait(40));
+	this.timeline.addTween(cjs.Tween.get(this.レイヤー_8).wait(1));
+
+	// レイヤー_2_obj_
+	this.レイヤー_2 = new lib.シーン_1_レイヤー_2();
+	this.レイヤー_2.name = "レイヤー_2";
+	this.レイヤー_2.setTransform(267.4,144.7,1,1,0,0,0,267.4,144.7);
+	this.レイヤー_2.depth = 0;
+	this.レイヤー_2.isAttachedToCamera = 0
+	this.レイヤー_2.isAttachedToMask = 0
+	this.レイヤー_2.layerDepth = 0
+	this.レイヤー_2.layerIndex = 1
+	this.レイヤー_2.maskLayerName = 0
+
+	this.timeline.addTween(cjs.Tween.get(this.レイヤー_2).wait(1));
 
 	// レイヤー_1_obj_
 	this.レイヤー_1 = new lib.シーン_1_レイヤー_1();
 	this.レイヤー_1.name = "レイヤー_1";
-	this.レイヤー_1.setTransform(398.9,242,1,1,0,0,0,398.9,242);
+	this.レイヤー_1.setTransform(263,158.2,1,1,0,0,0,263,158.2);
 	this.レイヤー_1.depth = 0;
 	this.レイヤー_1.isAttachedToCamera = 0
 	this.レイヤー_1.isAttachedToMask = 0
@@ -413,12 +390,25 @@ p.nominalBounds = new cjs.Rectangle(-75,-74.9,154.1,96.9);
 	this.レイヤー_1.layerIndex = 2
 	this.レイヤー_1.maskLayerName = 0
 
-	this.timeline.addTween(cjs.Tween.get(this.レイヤー_1).wait(40));
+	this.timeline.addTween(cjs.Tween.get(this.レイヤー_1).wait(1));
+
+	// レイヤー_7_obj_
+	this.レイヤー_7 = new lib.シーン_1_レイヤー_7();
+	this.レイヤー_7.name = "レイヤー_7";
+	this.レイヤー_7.setTransform(277.6,201.6,1,1,0,0,0,277.6,201.6);
+	this.レイヤー_7.depth = 0;
+	this.レイヤー_7.isAttachedToCamera = 0
+	this.レイヤー_7.isAttachedToMask = 0
+	this.レイヤー_7.layerDepth = 0
+	this.レイヤー_7.layerIndex = 3
+	this.レイヤー_7.maskLayerName = 0
+
+	this.timeline.addTween(cjs.Tween.get(this.レイヤー_7).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(274,199,283,202);
+p.nominalBounds = new cjs.Rectangle(274,171.6,277,260);
 // library properties:
 lib.properties = {
 	id: '2FA8E0C7230941478CE2CA3DB82DBEDF',
@@ -428,7 +418,7 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/game_atlas_.png?1596756341538", id:"game_atlas_"}
+		{src:"images/game_atlas_.png?1596778657725", id:"game_atlas_"}
 	],
 	preloads: []
 };
