@@ -38,7 +38,7 @@
 					return;
 				}
 				
-				var path = '../' + data.type + '/game/';
+				var path = '../samples/' + data.type + '/game/';
 				
 				var xhr = new XMLHttpRequest();
 				
@@ -52,9 +52,15 @@
 					document.head.appendChild(script);
 					document.head.removeChild(script);
 					
+					var pRatio = window.devicePixelRatio || 1;
 					var app = new PIXI.createjs.Application(data.comp, 'game', path, {
-						antialias: true
+						antialias: true,
+						resolution: pRatio
 					});
+					
+					var props = AdobeAn.getComposition(data.comp).getLibrary().properties;
+					app.app.view.style.width = props.width + 'px';
+					app.app.view.style.height = props.height + 'px';
 					
 					app
 						.initAsync({
