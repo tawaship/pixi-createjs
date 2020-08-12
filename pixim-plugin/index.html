@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no, minimal-ui">
+		<script src="../lib/createjs.js"></script>
+		<script src="../lib/pixi.5.3.2.min.js"></script>
+		<script src="../lib/Pixim.min.js"></script>
+		<script src="Pixim-createjs-plugin.js"></script>
+		<style>
+			body {
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			(function() {
+				function getQuery() {
+					var data = {};
+					
+					var q = window.location.search.slice(1);
+					
+					if (q) {
+						var l = q.split('&');
+						
+						for (var i = 0; i < l.length; i++) {
+							var a = l[i].split('=');
+							data[a[0]] = decodeURIComponent(a[1]);
+						}
+					}
+					
+					return data;
+				}
+				
+				var data = getQuery();
+				if (!data.type || !data.comp) {
+					return;
+				}
+				
+				var path = '../samples/' + data.type + '/game/';
+				
+				var xhr = new XMLHttpRequest();
+				
+				xhr.addEventListener('load', function() {
+					if (xhr.readyState !== 4) {
+						return;
+					}
+					
+					var script = document.createElement('script');
+					script.text = xhr.responseText;
+					document.head.appendChild(script);
+					document.head.removeChild(script);
+					
+					initCreatejsAsync(data.comp, path)
+						.then(function(lib) {
+							var pRatio = window.devicePixelRatio || 1;
+							var app = new Pixim.Application({
+								width: 450,
+								height: 800,
+								antialias: true,
+								resolution: pRatio
+							});
+							
+							var Game = Pixim.Content.create();
+							
+							Game.setConfig({
+								width: 450,
+								height: 800
+							});
+							
+							function Root($) {
+								Pixim.CreatejsContainer.call(this);
+								
+								var cjs = this.addCreatejs(new $.vars.lib.anim());
+							}
+							
+							Root.prototype = Object.create(Pixim.CreatejsContainer.prototype);
+							
+							Game.defineLibraries({
+								root: Root
+							});
+							
+							var game = new Game();
+							game.addVars({
+								lib: lib
+							});
+							
+							app
+								.fullScreen()
+								.attachAsync(game)
+								.then(function() {
+									app.play();
+								});
+						});
+				});
+				
+				xhr.open('GET', path + 'game.js?v=' + Date.now());
+				xhr.send(null);
+			})();
+		</script>
+	</div>
+	</body>
+</html>

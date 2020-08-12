@@ -1,114 +1,98 @@
 (function() {
-	function CreatejsApplication(id, rootName, basepath, pixiOptions) {
-		var comp = AdobeAn.getComposition(id);
-		if (!comp) {
-			throw new Error('no composition');
-		}
-		
-		var lib = comp.getLibrary();
-		var root = lib[rootName];
-		if (!root) {
-			throw new Error('no root class');
-		}
-		
-		var prop = lib.properties;
-		
-		pixiOptions = pixiOptions || {};
-		pixiOptions.width = prop.width;
-		pixiOptions.height = prop.height;
-		pixiOptions.autoStart = false;
-		pixiOptions.backgroundColor = parseInt(prop.color.slice(1), 16);
-		
-		var app = this._app = new PIXI.Application(pixiOptions);
-		
-		this._composition = comp;
-		this._rootClass = root;
-		this._basepath = basepath;
-		
-		createjs.Ticker.framerate = prop.fps;
-		
-		function handlePlay(e) {
-			stage._tickFunction(e);
-			app.render();
-		}
-		
-		Object.defineProperties(this, {
-			play: {
-				value: function() {
-					createjs.Ticker.addEventListener('tick', handlePlay);
+	function initCreatejsAsync(id, basepath) {
+		return initAsync(basepath, AdobeAn.getComposition(id))
+			.then(function(data) {
+				var evt = data.evt;
+				var comp = data.comp;
+				
+				var lib = comp.getLibrary();
+				var ss = comp.getSpriteSheet();
+				var queue = evt.target;
+				var ssMetadata = lib.ssMetadata;
+				
+				for (var i = 0; i < ssMetadata.length; i++) {
+					ss[ssMetadata[i].name] = new createjs.SpriteSheet({
+						images: [
+							queue.getResult(ssMetadata[i].name)
+						],
+						frames: ssMetadata[i].frames
+					});
 				}
-			},
-			
-			stop: {
-				value: function() {
-					createjs.Ticker.removeEventListener('tick', handlePlay);
-				}
-			}
-		});
+				
+				return lib;
+			});
 	}
 	
-	Object.defineProperties(CreatejsApplication.prototype, {
-		app: {
-			get: function() {
-				return this._app;
-			},
-			set: function(v) {
-			
+	function CreatejsContainer() {
+		Pixim.Container.call(this);
+		
+		this._createjsAnimID = 0;
+		this._lastCreatejsAnimID = 0;
+	}
+	
+	CreatejsContainer.prototype = Object.defineProperties(Object.create(Pixim.Container.prototype), {
+		addCreatejs: {
+			value: function(cjs) {
+				if (cjs instanceof createjs.MovieClip) {
+					var createjsAnimID = this._createjsAnimID++;
+					
+					cjs._childInstanceID = createjsAnimID;
+					
+					this.task.on('createjsAnim_' + createjsAnimID, function(e) {
+					console.log(5)
+						cjs._tick(e);
+					});
+				}
+				
+				this.addChild(cjs.getPixi());
+				
+				return cjs;
 			}
 		},
-		initAsync: {
-			value: function(options) {
-				var app = this;
-				var rootClass = this._rootClass;
-				
-				return initAsync(this._basepath, this._composition)
-					.then(function(data) {
-						var evt = data.evt;
-						var comp = data.comp;
-						
-						var lib = comp.getLibrary();
-						var ss = comp.getSpriteSheet();
-						var queue = evt.target;
-						var ssMetadata = lib.ssMetadata;
-						
-						for (var i = 0; i < ssMetadata.length; i++) {
-							ss[ssMetadata[i].name] = new createjs.SpriteSheet({
-								images: [
-									queue.getResult(ssMetadata[i].name)
-								],
-								frames: ssMetadata[i].frames
-							});
-						}
-						
-						var exportRoot = new rootClass();
-						
-						var stage = new lib.Stage();
-						initStage(stage, options);
-						
-						Object.defineProperties(window, {
-							exportRoot: {
-								value: exportRoot
-							},
-							
-							stage: {
-								value: stage
-							}
-						});
-						
-						AdobeAn.compositionLoaded(lib.properties.id);
-						
-						app.app.render();
-						
-						stage.addChild(exportRoot);
-						app.app.stage.addChild(exportRoot._pixiData.instance);
+		addCreatejsAt: {
+			value: function(cjs, index) {
+				if (cjs instanceof createjs.MovieClip) {
+					var createjsAnimID = this._createjsAnimID++;
+					
+					cjs._childInstanceID = createjsAnimID;
+					
+					this.task.on('createjsAnim_' + createjsAnimID, function(e) {
+						cjs._tick(e);
 					});
+				}
+				
+				this.addChildAt(cjs.getPixi(), index);
+				
+				return cjs;
 			}
-		}
+		},
+		removeCreatejs: {
+			value: function(cjs) {
+				if (cjs instanceof createjs.MovieClip) {
+					var createjsAnimID = cjs._childInstanceID;
+					
+					this.task.clear('createjsAnim_' + createjsAnimID);
+				}
+				
+				this.removeChild(cjs.getPixi());
+				
+				return cjs;
+			}
+		},
+		removeChildren: {
+			value: function() {
+				for (var i = this._lastCreatejsAnimID; i < this._createjsAnimID; i++) {
+					this.task.clear('createjsAnim_' + i);
+				}
+				
+				this._lastCreatejsAnimID = this._createjsAnimID;
+				
+				return Pixim.Container.prototype.removeChildren.call(this);
+			}
+		},
 	});
 	
-	var pixiObj = PIXI;
-	
-	///////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////
 	
 	function initAsync(basepath, comp) {
 		return new Promise(function(resolve, reject) {
@@ -200,40 +184,6 @@
 			Object.defineProperties(createjs.Shape.prototype, imageDescriptors);
 			Object.defineProperties(createjs.Text.prototype, imageDescriptors);
 			Object.defineProperties(createjs.Bitmap.prototype, imageDescriptors);
-			
-			stage.update = function(props) {
-				if (this.tickOnUpdate) { this.tick(props); }
-				this.dispatchEvent("drawstart");
-				if (this.autoClear) { this.clear(); }
-				
-				if (this._webGLContext) {
-					this._batchDraw(this, this._webGLContext);
-					if (this._autoPurge != -1 && !(this._drawID%((this._autoPurge/2)|0))) {
-						this.purgeTextures(this._autoPurge);
-					}
-				} else {
-					this.draw();
-				}
-				
-				this.dispatchEvent("drawend");
-			}
-			
-			stage.draw = containerDrawFunction;
-			
-			stage._updateFunction = stage.update;
-		} else {
-			stage._updateFunction = stage.tick;
-		}
-		
-		if (stage._handleTick) {
-			stage._tickFunction = function(e) {
-				stage._updateFunction();
-				stage._handleTick();
-			};
-		} else {
-			stage._tickFunction = function(e) {
-				stage._updateFunction();
-			};
 		}
 	}
 	
@@ -771,8 +721,7 @@
 				this._pixiData.subInstance.removeChildAt(index);
 				return createjsOrigin.MovieClip.prototype.removeChildAt.call(this, index);
 			}
-		}
-		,
+		},
 		removeAllChldren: {
 			value: function() {
 				this._pixiData.subInstance.removeChildren();
@@ -1321,40 +1270,16 @@
 	}
 	
 	createjs.ButtonHelper.prototype = Object.create(createjsOrigin.ButtonHelper.prototype);
-	/*
-	var originTo = createjs.Tween.prototype.to;
-	createjs.Tween.prototype.to = function() {
-		var obj = arguments[0];
-		
-		if ('rotation' in obj) {
-			var prevRotation = this._prevRotation || 0;
-			
-			if (Math.abs(obj.rotation - prevRotation) >= 360) {
-				if ('skewX' in obj) {
-					obj.skewX += 360;
-				}
-				
-				if ('skewY' in obj) {
-					obj.skewY += 360;
-				}
-			}
-			
-			this._prevRotation = obj.rotation;
-		}
-		
-		return originTo.apply(this, arguments);
-	};
-	*/
-	pixiObj.createjs = Object.defineProperties({}, {
-		Application: {
-			value: CreatejsApplication
+	
+	Object.defineProperties(window, {
+		initCreatejsAsync: {
+			value: initCreatejsAsync
 		}
 	});
 	
-	window,playSound = function(id, loop) {
-		return createjs.Sound.play(id, {
-			interrupt: createjs.Sound.INTERRUPT_EARLY,
-			loop: loop
-		});
-	}
+	Object.defineProperties(Pixim, {
+		CreatejsContainer: {
+			value: CreatejsContainer
+		}
+	});
 })();
