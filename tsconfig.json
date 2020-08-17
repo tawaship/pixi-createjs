@@ -1,0 +1,17 @@
+{
+  "include": ["src/player/pixim/**/*.ts"],
+  "compilerOptions": {
+    "target": "ES6",
+    "strict": true,
+    "declaration": true,
+    "outDir": "./types"
+  },
+  "typedocOptions": {
+    "mode": "file",
+    "out": "docs",
+    "moduleResolution": "node",
+    "gitRevision": "master",
+    "includeVersion": true
+  },
+  "exclude": ["node_modules", "src/**/*.d.ts"]
+}
