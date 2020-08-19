@@ -1,12 +1,12 @@
 import { initAsync, initStage } from '../common/core';
-import * as _Pixim from '@tawaship/pixim.js';
+import * as _PIXI from 'pixi.js';
 
 /**
  * @ignore
  */
 declare const window: any;
 
-namespace Pixim {
+namespace PIXI {
 	export namespace createjs {
 		/**
 		 * @property useSynchedTimeline Whether the movie clip plays when placed as a "graphic".
@@ -18,14 +18,15 @@ namespace Pixim {
 		/**
 		 * @see https://tawaship.github.io/Pixim.js/classes/pixim.application.html
 		 */
-		export class Player extends _Pixim.Application {
+		export class Player {
+			private _app: _PIXI.Application;
 			private _composition: any;
 			private _rootClass: any;
 			private _basepath: string;
 			private _stage: any;
 			private _handleTick: Function;
 			
-			constructor(id: string, rootName: string, basepath: string, pixiOptions: Object = {}, piximOptions: _Pixim.TApplicationOption = {}) {
+			constructor(id: string, rootName: string, basepath: string, pixiOptions: Object = {}) {
 				const comp = window.AdobeAn.getComposition(id);
 				if (!comp) {
 					throw new Error('no composition');
@@ -39,11 +40,14 @@ namespace Pixim {
 				
 				const prop = lib.properties;
 				
-				super(Object.assign(pixiOptions, {
+				this._app = new _PIXI.Application(Object.assign(pixiOptions, {
 					width: prop.width,
 					height: prop.height,
 					backgroundColor: parseInt(prop.color.slice(1), 16)
-				}), piximOptions);
+				}));
+				
+				document.body.appendChild(this._app.view);
+				this._app.stop();
 				
 				this._composition = comp;
 				this._rootClass = root;
@@ -54,31 +58,6 @@ namespace Pixim {
 				this._handleTick = this._handleStop;
 				
 				window.createjs.Ticker.addEventListener('tick', this._tick.bind(this));
-			}
-			
-			play() {
-				this._handleTick = this._handlePlay;
-				
-				return this;
-			}
-			
-			stop() {
-				this._handleTick = this._handleStop;
-				
-				return this;
-			}
-			
-			private _tick() {
-				this._handleTick();
-			}
-			
-			private _handlePlay() {
-				this._stage._tickFunction();
-				this.app.render();
-			}
-			
-			private _handleStop() {
-				
 			}
 			
 			initAsync(options: TCreatejsPlayerOption = {}) {
@@ -118,29 +97,41 @@ namespace Pixim {
 						
 						window.AdobeAn.compositionLoaded(lib.properties.id);
 						
-						const Content = _Pixim.Content.create();
-						
-						Content.defineLibraries({
-							root: class Root extends _Pixim.Container {
-								constructor($: any) {
-									super();
-									
-									this.addChild($.vars.root);
-								}
-							}
-						});
-						
-						const content = new Content();
-						content.addVars({
-							root: exportRoot.getPixi()
-						});
-						
-						this.app.render();
+						this._app.render();
 						
 						this._stage.addChild(exportRoot);
 						
-						return this.attachAsync(content);
+						this._app.stage.addChild(exportRoot.getPixi());
 					});
+			}
+			
+			play() {
+				this._handleTick = this._handlePlay;
+				
+				return this;
+			}
+			
+			stop() {
+				this._handleTick = this._handleStop;
+				
+				return this;
+			}
+			
+			private _tick() {
+				this._handleTick();
+			}
+			
+			private _handlePlay() {
+				this._stage._tickFunction();
+				this.app.render();
+			}
+			
+			private _handleStop() {
+				
+			}
+			
+			get app(): _PIXI.Application {
+				return this._app;
 			}
 		}
 	}
@@ -149,9 +140,9 @@ namespace Pixim {
 /**
  * @ignore
  */
-export import TCreatejsPlayerOption = Pixim.createjs.TCreatejsPlayerOption;
+export import TCreatejsPlayerOption = PIXI.createjs.TCreatejsPlayerOption;
 
 /**
  * @ignore
  */
-export import Player = Pixim.createjs.Player;
+export import Player = PIXI.createjs.Player;

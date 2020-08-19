@@ -8,13 +8,15 @@
   },
   "scripts": {
     "rollup": "rollup -c rollup.config.player.js",
-    "d": "tsc --target ES5 --emitDeclarationOnly",
-    "docs": "typedoc src/player/pixim/ --tsconfig tsconfig.player.json",
+    "d": "tsc -P tsconfig.player.json --target ES5 --emitDeclarationOnly",
+    "docs": "typedoc src/player/pixim/ typedoc src/player/common/ --tsconfig tsconfig.player.json",
     "test": "npm run rollup && npm run check",
     "test-browser": "npm run rollup && npm run check -- --debug",
     "check": "floss --path test/ --reporter=tap",
-    "watch": "npm run rollup -- -w",
-    "build": "ENV PROD=1 npm run rollup && npm run docs && npm run d && echo done."
+    "watch": "npm run rollup-player -- -w && npm run rollup-player -- -w",
+    "build-player": "ENV PROD=1 npm run rollup-player && npm run docs-player && echo done.",
+    "rollup-player": "rollup -c rollup.config.player.js",
+    "docs-player": "typedoc src/player/pixim/ --tsconfig tsconfig.player.json"
   },
   "keywords": [
     "pixi.js",
@@ -43,11 +45,11 @@
     "rollup": "^1.32.1",
     "rollup-plugin-terser": "^5.2.0",
     "tslib": "^1.11.0",
-    "typedoc": "^0.16.10",
+    "typedoc": "^0.18.0",
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "@tawaship/pixim.js": "^1.5.1",
+    "@tawaship/pixim.js": "^1.6.0",
     "pixi.js": "^5.3.3"
   }
 }

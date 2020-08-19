@@ -1,11 +1,7 @@
 {
-  "include": ["src/player/pixim/index.ts"],
+  "include": ["src/player/pixim/**/*.ts", "src/player/common/**/*.ts"],
   "compilerOptions": {
-    "target": "ES6",
-    "strict": true,
-    "declaration": true,
-    "outDir": "./types",
-    "allowJs": true
+    "target": "ES6"
   },
   "typedocOptions": {
     "mode": "file",

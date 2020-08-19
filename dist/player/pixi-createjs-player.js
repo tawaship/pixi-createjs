@@ -1,55 +1,13 @@
 /*!
  * @tawaship/pixim-createjs-player.js - v1.0.0
  * 
- * @require pixi.js v5.3.2
- * @require @tawaship/pixim.js v1.4.0
+ * @require pixi.js v5.3.3
+ * @require @tawaship/pixim.js v1.6.0
  * @author tawaship (makazu.mori@gmail.com)
  * @license MIT
  */
-this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
+this.PIXI = this.PIXI || {}, function(exports, PIXI$1) {
     "use strict";
-    Object.defineProperties(window, {
-        playSound: {
-            value: function(id, loop) {
-                return void 0 === loop && (loop = !1), window.createjs.Sound.play(id, {
-                    interrupt: window.createjs.Sound.INTERRUPT_EARLY,
-                    loop: loop
-                });
-            }
-        }
-    });
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation.
-
-    Permission to use, copy, modify, and/or distribute this software for any
-    purpose with or without fee is hereby granted.
-
-    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THIS SOFTWARE.
-    ***************************************************************************** */
-    var extendStatics = function(d, b) {
-        return (extendStatics = Object.setPrototypeOf || {
-            __proto__: []
-        } instanceof Array && function(d, b) {
-            d.__proto__ = b;
-        } || function(d, b) {
-            for (var p in b) {
-                b.hasOwnProperty(p) && (d[p] = b[p]);
-            }
-        })(d, b);
-    };
-    function __extends(d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        extendStatics(d, b), d.prototype = null === b ? Object.create(b) : (__.prototype = b.prototype, 
-        new __);
-    }
     function initAsync(basepath, comp) {
         return new Promise((function(resolve, reject) {
             var lib = comp.getLibrary();
@@ -119,6 +77,16 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             stage._updateFunction();
         };
     }
+    Object.defineProperties(window, {
+        playSound: {
+            value: function(id, loop) {
+                return void 0 === loop && (loop = !1), window.createjs.Sound.play(id, {
+                    interrupt: window.createjs.Sound.INTERRUPT_EARLY,
+                    loop: loop
+                });
+            }
+        }
+    });
     var createjsOrigin = {
         DisplayObject: createjs.DisplayObject,
         MovieClip: createjs.MovieClip,
@@ -375,12 +343,12 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
                         for (var list = [], i = 0; i < value.length; i++) {
                             var f = value[i];
                             if (!(f instanceof createjs.ColorMatrixFilter)) {
-                                var m = new PIXI.filters.ColorMatrixFilter;
+                                var m = new PIXI$1.filters.ColorMatrixFilter;
                                 m.matrix = [ f.redMultiplier, 0, 0, 0, f.redOffset / 255, 0, f.greenMultiplier, 0, 0, f.greenOffset / 255, 0, 0, f.blueMultiplier, 0, f.blueOffset / 255, 0, 0, 0, f.alphaMultiplier, f.alphaOffset / 255, 0, 0, 0, 0, 1 ], 
                                 list.push(m);
                             }
                         }
-                        for (var o = this._pixiData.instance, c = o.children, n = new PIXI.Container, nc = this._pixiData.subInstance = n.addChild(new PIXI.Container); c.length; ) {
+                        for (var o = this._pixiData.instance, c = o.children, n = new PIXI$1.Container, nc = this._pixiData.subInstance = n.addChild(new PIXI$1.Container); c.length; ) {
                             nc.addChild(c[0]);
                         }
                         o.addChild(n), o._filterContainer = nc, nc.updateTransform(), nc.calculateBounds();
@@ -411,11 +379,11 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
         }
     };
     createjs.MovieClip = function() {
-        overrideCreatejs(this, new PIXI.Container), createjsOrigin.MovieClip.apply(this, arguments);
+        overrideCreatejs(this, new PIXI$1.Container), createjsOrigin.MovieClip.apply(this, arguments);
     }, createjs.MovieClip.prototype = Object.defineProperties(Object.create(createjsOrigin.MovieClip.prototype), Object.assign({
         initialize: {
             value: function() {
-                return overrideCreatejs(this, new PIXI.Container), this._pixiData.subInstance = this._pixiData.instance, 
+                return overrideCreatejs(this, new PIXI$1.Container), this._pixiData.subInstance = this._pixiData.instance, 
                 createjsOrigin.MovieClip.prototype.initialize.apply(this, arguments);
             }
         },
@@ -445,22 +413,22 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             }
         }
     }, appendixDescriptor)), createjs.Sprite = function() {
-        overrideCreatejs(this, new PIXI.Sprite), createjsOrigin.Sprite.apply(this, arguments);
+        overrideCreatejs(this, new PIXI$1.Sprite), createjsOrigin.Sprite.apply(this, arguments);
     }, createjs.Sprite.prototype = Object.defineProperties(Object.create(createjsOrigin.Sprite.prototype), Object.assign({
         initialize: {
             value: function() {
-                return overrideCreatejs(this, new PIXI.Sprite), createjsOrigin.Sprite.prototype.initialize.apply(this, arguments);
+                return overrideCreatejs(this, new PIXI$1.Sprite), createjsOrigin.Sprite.prototype.initialize.apply(this, arguments);
             }
         },
         gotoAndStop: {
             value: function() {
                 createjsOrigin.Sprite.prototype.gotoAndStop.apply(this, arguments);
-                var frame = this.spriteSheet.getFrame(this.currentFrame), baseTexture = PIXI.BaseTexture.from(frame.image), texture = new PIXI.Texture(baseTexture, frame.rect);
+                var frame = this.spriteSheet.getFrame(this.currentFrame), baseTexture = PIXI$1.BaseTexture.from(frame.image), texture = new PIXI$1.Texture(baseTexture, frame.rect);
                 this._pixiData.instance.texture = texture;
             }
         }
     }, appendixDescriptor)), createjs.Shape = function() {
-        overrideCreatejs(this, new PIXI.Container), this._pixiData.masked = [], createjsOrigin.Shape.apply(this, arguments);
+        overrideCreatejs(this, new PIXI$1.Container), this._pixiData.masked = [], createjsOrigin.Shape.apply(this, arguments);
     }, createjs.Shape.prototype = Object.defineProperties(Object.create(createjsOrigin.Shape.prototype), Object.assign({
         graphics: {
             get: function() {
@@ -482,19 +450,19 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             }
         }
     }, appendixDescriptor)), createjs.Graphics = function() {
-        overrideCreatejs(this, new PIXI.Graphics), createjsOrigin.Graphics.apply(this, arguments), 
+        overrideCreatejs(this, new PIXI$1.Graphics), createjsOrigin.Graphics.apply(this, arguments), 
         this._pixiData.instance.beginFill(16772846, 1), this._pixiData.strokeFill = 0, this._pixiData.strokeAlpha = 1;
     };
-    var Pixim, LineCap = {
-        0: PIXI.LINE_JOIN.BUTT,
-        1: PIXI.LINE_JOIN.ROUND,
-        2: PIXI.LINE_JOIN.SQUARE
+    var PIXI, LineCap = {
+        0: PIXI$1.LINE_JOIN.BUTT,
+        1: PIXI$1.LINE_JOIN.ROUND,
+        2: PIXI$1.LINE_JOIN.SQUARE
     }, LineJoin = {
-        0: PIXI.LINE_JOIN.MITER,
-        1: PIXI.LINE_JOIN.ROUND,
-        2: PIXI.LINE_JOIN.BEVEL
+        0: PIXI$1.LINE_JOIN.MITER,
+        1: PIXI$1.LINE_JOIN.ROUND,
+        2: PIXI$1.LINE_JOIN.BEVEL
     };
-    return createjs.Graphics.prototype = Object.defineProperties(Object.create(createjsOrigin.Graphics.prototype), Object.assign({
+    createjs.Graphics.prototype = Object.defineProperties(Object.create(createjsOrigin.Graphics.prototype), Object.assign({
         moveTo: {
             value: function(x, y) {
                 return this._pixiData.instance.clone().endFill().containsPoint({
@@ -671,7 +639,7 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             value: createjs.Graphics.prototype.drawPolyStar
         }
     }), createjs.Text = function(text, font, color) {
-        overrideCreatejs(this, new PIXI.Container), this._originParams = Object.assign(this._originParams, {
+        overrideCreatejs(this, new PIXI$1.Container), this._originParams = Object.assign(this._originParams, {
             text: text,
             font: font,
             color: color,
@@ -680,7 +648,7 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             lineWidth: 0
         });
         var _font = this._parseFont(font);
-        this._pixiData.instance.text = this._pixiData.instance.addChild(new PIXI.Text(text, {
+        this._pixiData.instance.text = this._pixiData.instance.addChild(new PIXI$1.Text(text, {
             fontSize: _font.fontSize,
             fontFamily: _font.fontFamily,
             fill: this._parseColor(color),
@@ -757,7 +725,7 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             }
         }
     }, appendixDescriptor)), createjs.ButtonHelper = function() {
-        overrideCreatejs(this, new PIXI.Container), createjsOrigin.ButtonHelper.apply(this, arguments);
+        overrideCreatejs(this, new PIXI$1.Container), createjsOrigin.ButtonHelper.apply(this, arguments);
         var createjs = arguments[0], pixi = createjs._pixiData.instance, baseFrame = arguments[1], overFrame = arguments[2], downFrame = arguments[3], hit = arguments[5], hitFrame = arguments[6];
         hit.gotoAndStop(hitFrame);
         var hitPixi = pixi.addChild(hit._pixiData.instance);
@@ -775,81 +743,65 @@ this.Pixim = this.Pixim || {}, this.Pixim.createjs = function(PIXI, _Pixim) {
             isDown = !1, isOver ? createjs.gotoAndStop(overFrame) : createjs.gotoAndStop(baseFrame);
         })), hitPixi.interactive = !0, hitPixi.cursor = "pointer";
     }, createjs.ButtonHelper.prototype = Object.create(createjsOrigin.ButtonHelper.prototype), 
-    function(Pixim) {
+    function(PIXI) {
         !function(createjs) {
-            var Player = function(_super) {
-                function Player(id, rootName, basepath, pixiOptions, piximOptions) {
-                    void 0 === pixiOptions && (pixiOptions = {}), void 0 === piximOptions && (piximOptions = {});
-                    var _this = this, comp = window.AdobeAn.getComposition(id);
-                    if (!comp) {
-                        throw new Error("no composition");
-                    }
-                    var lib = comp.getLibrary(), root = lib[rootName];
-                    if (!root) {
-                        throw new Error("no root class");
-                    }
-                    var prop = lib.properties, app = (_this = _super.call(this, Object.assign(pixiOptions, {
-                        width: prop.width,
-                        height: prop.height,
-                        backgroundColor: parseInt(prop.color.slice(1), 16)
-                    }), piximOptions) || this).app;
-                    _this._composition = comp, _this._rootClass = root, _this._basepath = basepath, 
-                    window.createjs.Ticker.framerate = prop.fps;
-                    var handlePlay = function() {
-                        _this._stage._tickFunction(), app.render();
-                    };
-                    return Object.defineProperties(_this, {
-                        play: {
-                            value: function() {
-                                window.createjs.Ticker.addEventListener("tick", handlePlay);
-                            }
-                        },
-                        stop: {
-                            value: function() {
-                                window.createjs.Ticker.removeEventListener("tick", handlePlay);
-                            }
-                        }
-                    }), _this;
+            var Player = function(id, rootName, basepath, pixiOptions) {
+                void 0 === pixiOptions && (pixiOptions = {});
+                var comp = window.AdobeAn.getComposition(id);
+                if (!comp) {
+                    throw new Error("no composition");
                 }
-                return __extends(Player, _super), Player.prototype.initAsync = function(options) {
-                    var _this = this;
-                    void 0 === options && (options = {});
-                    this._rootClass;
-                    return initAsync(this._basepath, this._composition).then((function(data) {
-                        for (var evt = data.evt, comp = data.comp, lib = comp.getLibrary(), ss = comp.getSpriteSheet(), queue = evt.target, ssMetadata = lib.ssMetadata, i = 0; i < ssMetadata.length; i++) {
-                            ss[ssMetadata[i].name] = new window.createjs.SpriteSheet({
-                                images: [ queue.getResult(ssMetadata[i].name) ],
-                                frames: ssMetadata[i].frames
-                            });
-                        }
-                        var exportRoot = new _this._rootClass;
-                        _this._stage = new lib.Stage, initStage(_this._stage, options), Object.defineProperties(window, {
-                            exportRoot: {
-                                value: exportRoot
-                            },
-                            stage: {
-                                value: _this._stage
-                            }
-                        }), window.AdobeAn.compositionLoaded(lib.properties.id);
-                        var content = new Content;
-                        return content.addVars({
-                            root: exportRoot.getPixi()
-                        }), _this.app.render(), _this._stage.addChild(exportRoot), _this.attachAsync(content);
-                    }));
-                }, Player;
-            }(_Pixim.Application);
-            createjs.Player = Player;
-            var Content = _Pixim.Content.create();
-            Content.defineLibraries({
-                root: function(_super) {
-                    function Root($) {
-                        var _this = _super.call(this) || this;
-                        return _this.addChild($.vars.root), _this;
+                var lib = comp.getLibrary(), root = lib[rootName];
+                if (!root) {
+                    throw new Error("no root class");
+                }
+                var prop = lib.properties;
+                this._app = new PIXI$1.Application(Object.assign(pixiOptions, {
+                    width: prop.width,
+                    height: prop.height,
+                    backgroundColor: parseInt(prop.color.slice(1), 16)
+                })), document.body.appendChild(this._app.view), this._app.stop(), this._composition = comp, 
+                this._rootClass = root, this._basepath = basepath, window.createjs.Ticker.framerate = prop.fps, 
+                this._handleTick = this._handleStop, window.createjs.Ticker.addEventListener("tick", this._tick.bind(this));
+            }, prototypeAccessors = {
+                app: {
+                    configurable: !0
+                }
+            };
+            Player.prototype.initAsync = function(options) {
+                var this$1 = this;
+                return void 0 === options && (options = {}), initAsync(this._basepath, this._composition).then((function(data) {
+                    for (var evt = data.evt, comp = data.comp, lib = comp.getLibrary(), ss = comp.getSpriteSheet(), queue = evt.target, ssMetadata = lib.ssMetadata, i = 0; i < ssMetadata.length; i++) {
+                        ss[ssMetadata[i].name] = new window.createjs.SpriteSheet({
+                            images: [ queue.getResult(ssMetadata[i].name) ],
+                            frames: ssMetadata[i].frames
+                        });
                     }
-                    return __extends(Root, _super), Root;
-                }(_Pixim.Container)
-            });
-        }(Pixim.createjs || (Pixim.createjs = {}));
-    }(Pixim || (Pixim = {})), Pixim.createjs;
-}(PIXI, Pixim);
-//# sourceMappingURL=Pixim-createjs-player.js.map
+                    var exportRoot = new this$1._rootClass;
+                    this$1._stage = new lib.Stage, initStage(this$1._stage, options), Object.defineProperties(window, {
+                        exportRoot: {
+                            value: exportRoot
+                        },
+                        stage: {
+                            value: this$1._stage
+                        }
+                    }), window.AdobeAn.compositionLoaded(lib.properties.id), this$1._app.render(), this$1._stage.addChild(exportRoot), 
+                    this$1._app.stage.addChild(exportRoot.getPixi());
+                }));
+            }, Player.prototype.play = function() {
+                return this._handleTick = this._handlePlay, this;
+            }, Player.prototype.stop = function() {
+                return this._handleTick = this._handleStop, this;
+            }, Player.prototype._tick = function() {
+                this._handleTick();
+            }, Player.prototype._handlePlay = function() {
+                this._stage._tickFunction(), this.app.render();
+            }, Player.prototype._handleStop = function() {}, prototypeAccessors.app.get = function() {
+                return this._app;
+            }, Object.defineProperties(Player.prototype, prototypeAccessors), createjs.Player = Player;
+        }(PIXI.createjs || (PIXI.createjs = {}));
+    }(PIXI || (PIXI = {}));
+    var Player = PIXI.createjs.Player;
+    exports.Player = Player;
+}(this.PIXI.createjs = this.PIXI.createjs || {}, PIXI);
+//# sourceMappingURL=pixi-createjs-player.js.map

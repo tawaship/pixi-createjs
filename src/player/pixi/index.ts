@@ -1,3 +1,2 @@
-//export * from './Player';
-import { Pixim } from './Player';
-export default Pixim.createjs;
+import '../common/global';
+export * from './Player';

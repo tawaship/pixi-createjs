@@ -5,13 +5,17 @@ import buble from '@rollup/plugin-buble';
 import { terser } from 'rollup-plugin-terser';
 import del from 'del';
 
-const version = require('./package.json').version;
-const playerBanner = [
+const conf = require('./package.json');
+const version = conf.version;
+const pixi = conf.dependencies['pixi.js'].replace('^', '');
+const pixim = conf.dependencies['@tawaship/pixim.js'].replace('^', '');
+
+const banner = [
 	'/*!',
 	` * @tawaship/pixim-createjs-player.js - v${version}`,
 	' * ',
-	' * @require pixi.js v5.3.2',
-	' * @require @tawaship/pixim.js v1.4.0',
+	` * @require pixi.js v${pixi}`,
+	` * @require @tawaship/pixim.js v${pixim}`,
 	' * @author tawaship (makazu.mori@gmail.com)',
 	' * @license MIT',
 	' */',
@@ -20,35 +24,101 @@ const playerBanner = [
 
 export default (async () => {
 	if (process.env.PROD) {
-	//	await del(['./docs', './types', './dist']);
+		await del(['./docs', './dist/player']);
 	}
 	
 	return [
-		/*{
-			input: 'src/player/pixi/index.ts',
+		{
+			input: 'src/player/pixim/index.ts',
 			output: [
 				{
-					playerBanner,
-					file: 'dist/pixi-createjs-player.js',
+					banner,
+					file: 'dist/player/Pixim-createjs-player.js',
 					format: 'iife',
-					name: 'PIXI.createjs',
+					name: 'Pixim.createjs',
 					sourcemap: true,
+					extend: true,
 					globals: {
 						'pixi.js': 'PIXI',
-						AdobeAn: 'AdobeAn'
+						'@tawaship/pixim.js': 'Pixim'
 					}
 				}
 			],
-			external: ['pixi.js', 'howler'],
+			external: ['pixi.js', '@tawaship/pixim.js'],
 			plugins: [
 				nodeResolve(),
 				commonjs(),
-				typescript(),
+				typescript({tsconfig: 'tsconfig.player.pixim.json'}),
 				buble(),
 				terser({
 					compress: {
 						//drop_console: true
+						//pure_funcs: ['console.log']
+					},
+					mangle: false,
+					output: {
+						beautify: true,
+						braces: true
+					}
+				})
+			]
+		},
+		{
+			input: 'src/player/pixim/index.ts',
+			output: [
+				{
+					banner,
+					file: 'dist/player/Pixim-createjs-player.min.js',
+					format: 'iife',
+					name: 'Pixim.createjs',
+					sourcemap: true,
+					extend: true,
+					globals: {
+						'pixi.js': 'PIXI',
+						'@tawaship/pixim.js': 'Pixim'
+					},
+					compact: true
+				}
+			],
+			external: ['pixi.js', '@tawaship/pixim.js'],
+			plugins: [
+				nodeResolve(),
+				commonjs(),
+				typescript({tsconfig: 'tsconfig.player.pixim.json'}),
+				buble(),
+				terser({
+					compress: {
+						//drop_console: true,
 						pure_funcs: ['console.log']
+					}
+				})
+			]
+		},
+		{
+			input: 'src/player/pixi/index.ts',
+			output: [
+				{
+					banner,
+					file: 'dist/player/pixi-createjs-player.js',
+					format: 'iife',
+					name: 'PIXI.createjs',
+					sourcemap: true,
+					extend: true,
+					globals: {
+						'pixi.js': 'PIXI'
+					}
+				}
+			],
+			external: ['pixi.js'],
+			plugins: [
+				nodeResolve(),
+				commonjs(),
+				typescript({tsconfig: 'tsconfig.player.pixi.json'}),
+				buble(),
+				terser({
+					compress: {
+						//drop_console: true
+						//pure_funcs: ['console.log']
 					},
 					mangle: false,
 					output: {
@@ -62,86 +132,23 @@ export default (async () => {
 			input: 'src/player/pixi/index.ts',
 			output: [
 				{
-					playerBanner,
-					file: 'dist/pixi-createjs-player.min.js',
+					banner,
+					file: 'dist/player/pixi-createjs-player.min.js',
 					format: 'iife',
 					name: 'PIXI.createjs',
-					globals: {
-						'pixi.js': 'PIXI',
-						AdobeAn: 'AdobeAn'
-					},
-					compact: true
-				}
-			],
-			external: ['pixi.js', 'howler'],
-			plugins: [
-				nodeResolve(),
-				commonjs(),
-				typescript(),
-				buble(),
-				terser({
-					compress: {
-						//drop_console: true,
-						pure_funcs: ['console.log']
-					}
-				})
-			]
-		},*/
-		{
-			input: 'src/player/pixim/index.ts',
-			output: 
-				{
-					banner: playerBanner,
-					file: 'dist/Pixim-createjs-player.js',
-					format: 'iife',
-					//dir: 'dist',
-					name: 'Pixim.createjs',
 					sourcemap: true,
+					extend: true,
 					globals: {
-						'pixi.js': 'PIXI',
-						'@tawaship/pixim.js': 'Pixim'
-					}
-				}
-			,
-			external: ['pixi.js', '@tawaship/pixim.js'],
-			plugins: [
-				nodeResolve(),
-				commonjs(),
-				typescript({tsconfig: false, include: ['src/player/pixim/**/*.ts', 'src/player/common/**/*.ts']}),
-				buble(),
-				terser({
-					compress: {
-						//drop_console: true
-						pure_funcs: ['console.log']
-					},
-					mangle: false,
-					output: {
-						beautify: true,
-						braces: true
-					}
-				})
-			]
-		}/*,
-		{
-			input: 'src/player/pixim/index.ts',
-			output: [
-				{
-					banner: playerBanner,
-					file: 'dist/Pixim-createjs-player.min.js',
-					format: 'iife',
-					name: 'Pixim.createjs',
-					globals: {
-						'pixi.js': 'PIXI',
-						'@tawaship/pixim.js': 'Pixim'
+						'pixi.js': 'PIXI'
 					},
 					compact: true
 				}
 			],
-			external: ['pixi.js', '@tawaship/pixim.js'],
+			external: ['pixi.js'],
 			plugins: [
 				nodeResolve(),
 				commonjs(),
-				typescript(),
+				typescript({tsconfig: 'tsconfig.player.pixi.json'}),
 				buble(),
 				terser({
 					compress: {
@@ -150,6 +157,6 @@ export default (async () => {
 					}
 				})
 			]
-		}*/
+		}
 	]
 })();

@@ -6,7 +6,7 @@
 		<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
 		<script src="../lib/pixi.5.3.2.min.js"></script>
 		<script src="../lib/Pixim.min.js"></script>
-		<script src="../dist/Pixim-createjs-player.js"></script>
+		<script src="../dist/player/Pixim-createjs-player.js"></script>
 		<style>
 			body {
 				margin: 0;
@@ -52,26 +52,21 @@
 					script.text = xhr.responseText;
 					document.head.appendChild(script);
 					document.head.removeChild(script);
-					console.log(Pixim.createjs.Player, playSound)
+					
 					var pRatio = window.devicePixelRatio || 1;
-					var app = new Pixim.createjs.Player(data.comp, 'game', path, {
+					var player = new Pixim.createjs.Player(data.comp, 'game', path, {
 						antialias: true,
 						resolution: pRatio
 					}, {
-						autoAdjust: true
+						autoAdjust: false
 					});
 					
-					var props = AdobeAn.getComposition(data.comp).getLibrary().properties;
-					//app.app.view.style.width = props.width + 'px';
-					//app.app.view.style.height = props.height + 'px';
-					
-					app
-						.fullScreen()
+					player
 						.initAsync({
 							useSynchedTimeline: true
 						})
 						.then(function() {
-							app.play();
+							player.play();
 						});
 				});
 				
