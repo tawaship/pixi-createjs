@@ -38,7 +38,7 @@
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@rollup/plugin-typescript": "^5.0.2",
     "del": "^5.1.0",
-    "electron": "^4.1.4",
+    "electron": "^15.5.5",
     "floss": "^3.0.0",
     "nyc": "^15.0.0",
     "pixi.js-legacy": "^5.2.1",
