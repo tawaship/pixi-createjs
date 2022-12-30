@@ -39,7 +39,7 @@
     "@rollup/plugin-typescript": "^5.0.2",
     "del": "^5.1.0",
     "electron": "^4.1.4",
-    "floss": "^3.0.0",
+    "floss": "^5.0.1",
     "nyc": "^15.0.0",
     "pixi.js-legacy": "^5.2.1",
     "rollup": "^1.32.1",
